@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/DionKanhai/chatspark/issues"
   },
-  "homepage": "https://github.com/DionKanhai/chatspark#readme"
+  "homepage": "https://github.com/DionKanhai/chatspark#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
