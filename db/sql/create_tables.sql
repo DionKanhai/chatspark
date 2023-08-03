@@ -1,0 +1,31 @@
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS user_friends CASCADE;
+DROP TABLE IF EXISTS user_blocked CASCADE;
+DROP TABLE IF EXISTS messages CASCADE;
+
+
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY NOT NULL,
+  username VARCHAR(100) NOT NULL,
+  password VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE user_friends (
+  id SERIAL PRIMARY KEY NOT NULL,
+  users_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+);
+
+CREATE TABLE user_blocked (
+  id SERIAL PRIMARY KEY NOT NULL,
+  users_blocked_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  UNIQUE (users_id, users_blocked_id)
+);
+
+CREATE TABLE messages (
+  id SERIAL PRIMARY KEY NOT NULL,
+  sender_id INTEGER NOT NULL REFERENCES users(id),
+  receiver_id INTEGER NOT NULL REFERENCES users(id),
+  timestamp TIMESTAMPTZ DEFAULT NOW(),
+  message_text TEXT NOT NULL,
+);
