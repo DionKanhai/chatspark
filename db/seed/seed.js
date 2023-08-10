@@ -1,5 +1,5 @@
 const faker = require('faker');
-const sequelize = require('../sequelize-instance');
+const sequelize = require('../models/sequelize-instance');
 const User = require('../models/user');
 
 
@@ -16,4 +16,10 @@ async function seedDatabase() {
   console.log('Seeding finished!')
 }
 
-seedDatabase();
+seedDatabase()
+  .then(() => {
+    sequelize.close();
+  })
+  .catch(error => {
+    console.error('Error seeding database:', error);
+  });
